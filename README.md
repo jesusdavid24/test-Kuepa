@@ -117,6 +117,8 @@ cd test-kuepa
 
 I must clarify that when a user is created an email is sent to your registered email and you must confirm the account. This email is a test email, I only created it for the test and there is no problem to use it.
 
+For the database we used ORM prisma with mongodb. I created a test cluster and in the environment variables I leave the exact address of my cluster, in case it does not work, it is necessary to go to mongo atlas and create a new cluster. After creating it, go to the part that says connection and there it gives you a link to mongo compass, I used that one, but you can use the one you want.
+
 ```shell
   PORT=3005
   DATABASE_URL=mongodb+srv://jbravov:hsgt32ycy0x6VVuv@kuepa.vxbsmv8.mongodb.net/dbkuepa
