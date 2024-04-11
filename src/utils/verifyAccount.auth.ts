@@ -4,6 +4,7 @@ import { type User } from '@api/users/user.types';
 export const createAuthResponse = (input: User) => {
   const payload = {
     id: input.id,
+    email: input.email,
     name: input.name,
     role: input.role
   };

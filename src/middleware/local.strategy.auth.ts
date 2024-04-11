@@ -26,6 +26,11 @@ const LocalStrategy = new Strategy(
         return;
       }
 
+      if (!user.isActive) {
+        done(null, false, { message: 'unauthorized' });
+        return;
+      }
+
       done(null, user);
     } catch (exception: unknown) {
       done(exception);

@@ -13,7 +13,6 @@ function initSocket(server: HttpServer) {
   wsServer.on('connection', (socket) => {
     socket.on('message', (message) => {
       wsServer?.emit('message', {
-        user: 'jesus',
         message
       });
     });

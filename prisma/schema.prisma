@@ -24,7 +24,7 @@ model User {
   resetToken    String?
   expireToken   DateTime?
   recoveryToken String?
-  role          userRole
+  role          userRole  @default(STUDENT)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

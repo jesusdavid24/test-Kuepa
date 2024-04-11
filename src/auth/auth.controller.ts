@@ -20,6 +20,7 @@ export async function login(req: Request, res: Response) {
     const payload = {
       id: user.id,
       name: user.name,
+      email: user.email,
       role: user.role
     };
 
@@ -28,6 +29,7 @@ export async function login(req: Request, res: Response) {
     const userLogged = {
       name: user.name,
       role: user.role,
+      email: user.email,
       recoveryToken: user.recoveryToken
     };
 
