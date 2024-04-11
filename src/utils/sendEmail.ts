@@ -21,6 +21,9 @@ export async function welcomeEmail(user: User) {
       color: #325AD8 ;
     `
   }
+
+  const link = `http://localhost:5173/verify-account/${user.resetToken}`;
+
   const email = {
     from: 'Test Kuepa<testkuepa@gmail.com>',
     to: user.email,
@@ -28,9 +31,10 @@ export async function welcomeEmail(user: User) {
     html: `
       <div style='${styles.container}'>
         <h1 style='${styles.title}'>Hola ${user.name} </h1>
+        <p>Ingresa al siguiente link para confirmar tu cuenta ${link}</p>
       </div>
     `,
-    text: `Bienvenido(a) Kuepa Education`,
+    text: `Bienvenido(a) Kuepa EduTech`,
   };
 
   return email;
