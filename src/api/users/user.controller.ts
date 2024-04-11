@@ -56,9 +56,18 @@ export async function createUser(req: Request, res: Response) {
 
     const user = await create(data);
 
+    const profile = {
+      name: user.name
+    };
+
     await sendNodeMailer(await welcomeEmail(user));
 
-    return res.status(201).json(user);
+    return res
+      .status(201)
+      .json({
+        message: 'user register successfully, please verifry account',
+        profile
+      });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
