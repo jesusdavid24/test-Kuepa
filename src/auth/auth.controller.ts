@@ -5,7 +5,13 @@ import { signToken, changePassword } from './auth.service';
 import { type User } from '@api/users/user.types';
 import { sendNodeMailer } from '../config/nodemailer';
 import { recoveryPassword } from '@utils/sendEmail';
-import { getUserByEmail } from '@api/users/user.service';
+import { createAuthResponse } from '@utils/verifyAccount.auth';
+
+import {
+  getUserByEmail,
+  getUserByResetToken,
+  put
+} from '@api/users/user.service';
 
 export async function login(req: Request, res: Response) {
   try {
@@ -14,6 +20,7 @@ export async function login(req: Request, res: Response) {
     const payload = {
       id: user.id,
       name: user.name,
+      email: user.email,
       role: user.role
     };
 
@@ -22,10 +29,42 @@ export async function login(req: Request, res: Response) {
     const userLogged = {
       name: user.name,
       role: user.role,
+      email: user.email,
       recoveryToken: user.recoveryToken
     };
 
     res.json({ token, userLogged });
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    res.status(400).send({ message });
+  }
+}
+
+export async function activeHandler(req: Request, res: Response) {
+  try {
+    const { token: tokenParam } = req.params;
+    const user = await getUserByResetToken(tokenParam);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Invalid token' });
+    }
+
+    if (user.expireToken) {
+      if (Date.now() > user.expireToken.getTime()) {
+        return res.status(400).json({ message: 'Token expired' });
+      }
+    }
+
+    const currentUser = await put(user.id, {
+      isActive: true,
+      resetToken: null,
+      expireToken: null
+    });
+    console.log(currentUser.id);
+
+    const { token, profile } = createAuthResponse(currentUser);
+
+    res.status(200).json({ token, profile });
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     res.status(400).send({ message });

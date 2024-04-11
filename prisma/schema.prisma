@@ -14,17 +14,19 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String   @unique
-  userName      String   @unique
+  email         String    @unique
+  userName      String    @unique
   password      String
-  isActive      Boolean  @default(true)
-  isDeleted     Boolean  @default(false)
+  isActive      Boolean   @default(false)
+  isDeleted     Boolean   @default(false)
+  resetToken    String?
+  expireToken   DateTime?
   recoveryToken String?
-  role          userRole
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  role          userRole  @default(STUDENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 enum userRole {
