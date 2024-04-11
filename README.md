@@ -33,7 +33,7 @@ WebSocket Integration: WebSocket endpoints are implemented to establish persiste
 | ---------------- | --------- | ---------------- | --------------------- |
 | /api/healthcheck | GET       |                  | Show a simple message |
 | /api/user        | GET       |                  | Get list of users     |
-| /api/users       | POST      |                  | Creates a new users   |
+| /api/user        | POST      |                  | Creates a new users   |
 
 ## Usage
 
