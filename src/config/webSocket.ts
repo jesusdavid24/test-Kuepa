@@ -12,9 +12,6 @@ function initSocket(server: HttpServer) {
 
   wsServer.on('connection', (socket) => {
     socket.on('message', (message, user) => {
-      console.log(message);
-      console.log(user);
-
       wsServer?.emit('message', {
         user,
         message
