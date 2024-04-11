@@ -6,15 +6,16 @@ let wsServer: Server | null = null;
 function initSocket(server: HttpServer) {
   wsServer = new Server(server, {
     cors: {
-      origin: 'http://localhost:5173'
+      origin: process.env.BASE_URL_FRONT
     }
   });
 
   wsServer.on('connection', (socket) => {
-    console.log('connection');
-
-    socket.on('disconnet', () => {
-      console.log('user disconnected');
+    socket.on('message', (message) => {
+      wsServer?.emit('message', {
+        user: 'jesus',
+        message
+      });
     });
   });
 }
