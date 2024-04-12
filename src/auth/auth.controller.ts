@@ -60,7 +60,6 @@ export async function activeHandler(req: Request, res: Response) {
       resetToken: null,
       expireToken: null
     });
-    console.log(currentUser.id);
 
     const { token, profile } = createAuthResponse(currentUser);
 

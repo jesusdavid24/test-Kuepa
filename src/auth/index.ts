@@ -10,8 +10,8 @@ import {
 
 const router = Router();
 
-router.post('/', passport.authenticate('local', { session: false }), login);
 router.get('/active-account/:token', activeHandler);
+router.post('/', passport.authenticate('local', { session: false }), login);
 router.post('/recovery', sendEmailRecovery);
 router.post('/change-password', changesPasswords);
 

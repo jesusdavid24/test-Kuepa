@@ -1,7 +1,7 @@
 import { type Application } from 'express';
 import healtCheckRouter from '@api/healtCheck';
 import userRouter from '@api/users';
-import authRouter from './auth/';
+import authRouter from './auth';
 
 const routes = (app: Application) => {
   app.use('/api/', healtCheckRouter);

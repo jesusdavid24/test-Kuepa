@@ -12,7 +12,7 @@ export const createAuthResponse = (input: User) => {
   const token = signToken(payload);
 
   const profile = {
-    fullName: input.name,
+    name: input.name,
     email: input.email,
     role: input.role
   };
