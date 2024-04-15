@@ -9,6 +9,16 @@ export async function getAllUser() {
   return users;
 }
 
+export async function getUserByUserName(userName: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      userName
+    }
+  });
+
+  return user;
+}
+
 export async function getUserByResetToken(resetToken: string) {
   const user =  await prisma.user.findFirst({
     where: {
@@ -33,7 +43,8 @@ export async function create(input: User ) {
 
   const user = await prisma.user.upsert({
     where: {
-      email: data.email
+      email: data.email,
+      userName: data.userName
     },
     create: {
       ...data,

@@ -11,9 +11,10 @@ function initSocket(server: HttpServer) {
   });
 
   wsServer.on('connection', (socket) => {
-    socket.on('message', (message, user) => {
+    socket.on('message', (message, user, role) => {
       wsServer?.emit('message', {
         user,
+        role,
         message
       });
     });
