@@ -44,7 +44,6 @@ export async function create(input: User ) {
   const user = await prisma.user.upsert({
     where: {
       email: data.email,
-      userName: data.userName
     },
     create: {
       ...data,

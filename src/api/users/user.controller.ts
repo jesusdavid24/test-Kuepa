@@ -85,6 +85,14 @@ export async function createUser(req: Request, res: Response) {
   try {
     const data: User = req.body;
 
+    const { email } = data;
+
+    const userEmail = await getUserByEmail(email);
+
+    if (userEmail) {
+      return res.status(400).send('Email exists');
+    }
+
     const user = await create(data);
 
     const profile = {
